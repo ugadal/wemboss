@@ -1,0 +1,17 @@
+emnu             Simple menu of EMBOSS applications
+mse              Multiple Sequence Editor
+aaindexextract   Extract data from AAINDEX
+cutgextract      Extract data from CUTG
+jaspextract		 Extract data from JASPAR
+printsextract    Extract data from PRINTS
+prosextract      Builds the PROSITE motif database for patmatmotifs to search
+rebaseextract    Extract data from REBASE
+tfextract        Extract data from TRANSFAC
+acdc             ACD compiler
+acdpretty        ACD pretty printing utility
+acdtable         Creates an HTML table from an ACD file
+acdtrace         ACD compiler on-screen trace
+acdvalid         ACD file validation
+ACD
+MENUS
+ASSORTED

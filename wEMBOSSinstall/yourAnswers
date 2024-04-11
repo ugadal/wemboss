@@ -1,0 +1,8 @@
+/usr/local/share/EMBOSS
+/usr/local/bin
+apache
+/var/www/localhost/htdocs
+localhost
+80
+/opt/wemboss
+"moi"@localhost

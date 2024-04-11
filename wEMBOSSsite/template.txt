@@ -1,0 +1,205 @@
+/*************************************************************************
+
+ Copyright (C) 2003, 2004, 2005 Marc Colet, Martin Sarachu
+
+ This file is part of wEMBOSS.
+
+ wEMBOSS is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ wEMBOSS is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with Foobar; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+*************************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include <pwd.h>
+#include <sys/types.h>
+#include <errno.h>
+#define NOBODY "nobody"
+char *user;
+int  userid;  
+
+void print_error( char *error_context, char *error_message) {
+ int cl;
+  printf("Content-type: text/html\n\n");
+  printf("error, %s <P>", error_context);
+    printf("%s", error_message);
+  exit(1);
+} 
+
+main(int argc, char *argv[]) {
+
+  if (getuid() !=  getpwnam(NOBODY)->pw_uid) {
+    print_error("catch:", "Sorry, the owner of this process is not allowed to run catch program, ask wEMBOSS  manager! ");
+  }
+                        /*  Identifying the user, he becomes the owner of the process */
+  user = getenv("REMOTE_USER");
+  if (userid = getpwnam(user)->pw_uid ){
+    if (setgid(getpwnam(user)->pw_gid) < 0){
+      print_error("catch	", "can't reset GID ") ;
+    }
+    if (setuid(userid) < 0){
+      print_error("catch", "can't reset UID ") ;
+    }
+  }
+  else {
+    print_error("getit, unknown user:", user);
+  }
+  
+
+                        /* Identifying wEMBOSS HOME and EMBOSS HOME */
+   fflush(NULL);
+   execv ("./catch.pl", argv, NULL);
+   print_error("catch: can't execute catch.pl", "catch.pl");
+} /* main */
+%===%#!$perl
+###########################################################################
+# Copyright (C) 2003, 2004, 2005 Marc Colet, Martin Sarachu
+#
+# This file is part of wEMBOSS.
+#
+# wEMBOSS is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# wEMBOSS is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with wEMBOSS; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+###########################################################################
+use CGI;
+use Cwd qw ( chdir );
+use Cwd;
+use lib "../lib";
+use wEMBOSS::viewAction; 
+use wEMBOSS::titleAction;
+use wEMBOSS::menuAction;
+use wEMBOSS::searchAction;
+use wEMBOSS::runAction;
+use wEMBOSS::Input;
+use wEMBOSS::PMAction;
+use wEMBOSS::startAction;
+use strict;
+
+# initialize location variables...
+#g
+
+my $cgi = new CGI;
+
+our $EMBOSS_HOME	= '$emboss_home';
+# When using Eclipse comment the above line and add an appropriate explicit assignment of $EMBOSS_HOME
+#our $EMBOSS_HOME	= '/usr/local/share/EMBOSS';
+
+our $EMBOSS_BIN	= '$emboss_bin';
+# When using Eclipse comment the above line and add an appropriate explicit assignment of $EMBOSS_BIN
+#our $EMBOSS_BIN	= '/usr/local/bin';
+ 
+our $wEMBOSS_HOME	= '$wemboss_home';
+# When using Eclipse comment the above line and add an appropriate explicit assignment of $wEMBOSS_HOME
+#our $wEMBOSS_HOME	= '/Users/marc/Documents/workspace/wEMBOSSDEV-2.0/wEMBOSS';
+ 
+ our $VERBOSE		= 0;
+
+
+#
+$ENV{'USER'} = $ENV{'REMOTE_USER'};
+my($user,$bs,$homedir) = ("","","");
+($user,$bs,$bs,$bs,$bs,$bs,$bs,$homedir) = getpwnam($ENV{'REMOTE_USER'});
+#($user,$bs,$bs,$bs,$bs,$bs,$bs,$homedir) = getpwnam('marc');
+my $wprojectsdir = "$homedir/wProjects";
+if (not chdir($wprojectsdir)) {
+	# wProjects does not exits, new user, create dir
+	if (not mkdir($wprojectsdir, 0000750)) {
+		print "Content-type: text/html\n\n";
+		wEMBOSS::Input::errorPage(" wEMBOSS : Unable to mkdir $wprojectsdir directory, ask system manager! : $!", );
+		exit(1);
+	}
+	if (not chdir($wprojectsdir)) {
+		print "Content-type: text/html\n\n";
+		wEMBOSS::Input::errorPage(" wEMBOSS :  Unable to chdir to $wprojectsdir directory, ask system manager : $!");
+		exit(1);
+	}
+}
+# set other environment variables.  for some reason, wossname requires tt the
+# EMBOSS binaries be in the path...
+
+$ENV{'PATH'} = "$EMBOSS_BIN:/bin:/usr/local/bin";
+$ENV{HOME} =$wprojectsdir;
+$ENV{'PLPLOT_LIB'} = $EMBOSS_HOME;
+my $pwd = $ENV{'PWD'};
+for ($cgi->param("_action")) {
+	/^view|^output/	and do { wEMBOSS::viewAction::viewWindow($cgi); last; };
+	print "Content-type: text/html\n\n";
+	/^title/        and do { wEMBOSS::titleAction::header($cgi); last; };
+	/^mmenu/        and do { wEMBOSS::menuAction::programsMenu(); last; };
+	/^key/          and do { wEMBOSS::searchAction::programsByKeywords(); last; };
+	/^search/       and do { wEMBOSS::searchAction::searchWindow($cgi); last; };
+	/^mngt/         and do { wEMBOSS::PMAction::projectManagementPage($cgi); last; };
+	/^input/        and do { wEMBOSS::Input::programPage($cgi); last; };
+	/^run/          and do { wEMBOSS::runAction::programRun($cgi); last; };
+	/^start/		and do { wEMBOSS::startAction::startwEMBOSS($cgi); last; };
+	print " action \$_ not found";
+}
+
+print "\n";
+%===%#!$perl
+
+# assume were receiving a postscript  file on STDIN
+use strict;
+
+my $tmpname = shift @ARGV;
+open(D,">/tmp/xxx");
+print D @ARGV;
+close D;
+my $ps_file = "$web_root/wEMBOSS/tmp/$tmpname.ps"; # a hard link!
+open( DEST,"> $ps_file");
+while( <> ) {
+    print DEST $_;
+}
+close DEST;
+my $pdf_file = "$web_root/wEMBOSS/tmp/$tmpname.pdf";
+system( "$ps2pdf $ps_file $pdf_file 1>/tmp/x 2>/tmp/xx" );
+unlink $ps_file;
+%===%<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="/wEMBOSS/wEMBOSS.css">
+<script language="JavaScript" src="/wEMBOSS/wEMBOSS.js"> </script>
+</head>
+<body>
+	      <h3 align="center">You are going to start wEMBOSS.</h>
+	      <h3 align="center">Don't use <em>back or forward</em> within wEMBOSS main window!</h>
+	      <h3 align="center">Navigate simply through your projects and programs instead </h>
+	      <p> 
+	      <table  align="center" border="0" cellspacing="0" cellpadding="0">
+               <tr><th>If you are a registered user &nbsp;</th>
+                <td>
+		 <table border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+		   <td><img src="/wEMBOSS/images/but_pink_left.gif" width="20" height="16"></td>
+                   <td nowrap background="/wEMBOSS/images/but_pink_back.gif" width="75" height="16"><a href="#"
+                        onClick="popup('/wEMBOSS_cgi/catch?_action=start','wEMBOSSwindow'); return false;" class="but">Start wEMBOSS</a></td>
+                   <td><img src="/wEMBOSS/images/but_pink_right.gif" width="10" height="16"></td>
+		  </tr>
+		 </table>
+		</td>
+		<th>&nbsp; otherwise contact <a href="$wemboss_mail">$wemboss_mail</a><br></th>
+               </tr>
+	     </table>
+</body>
+</html>
+

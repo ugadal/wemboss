@@ -1,0 +1,263 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+td {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #333333;
+	font-size: 11px;
+}
+.group {
+color: #333333;
+font-size: 12px;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+A.group {
+text-decoration: none;
+}
+
+A.group:Link {
+text-decoration: none;
+}
+
+A.group:Visited {
+}
+A.group:Hover {
+cursor: pointer;
+text-decoration: underline;
+}
+.subGroup {
+color: #b73c45;
+font-size: 12px;
+font-family: Arial, Helvetica, sans-serif;
+}
+A.subGroup:Link {
+text-decoration: none;
+}
+A.subGroup:Visited {
+text-decoration: none;
+}
+A.subGroup:Hover {
+cursor: pointer;
+text-decoration: underline;
+}
+
+.sub {
+	position: relative;
+	left: 5px;
+	color: #b73c45;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	display: none;
+}
+A.menu {
+	position: relative;
+	left: 15px;
+	color: #b73c45;
+	text-decoration: none;
+	font-style: italic;
+}
+
+
+TD.name {
+	position: relative;
+	left: 15px;
+	color: #bb4553;
+	text-decoration: none;
+	font-style: italic;
+}
+
+
+.doc {
+        position: absolute;
+	top: 25px;
+	height: 165px;
+	width:290px;
+	color: black;
+	font-size: 11px;
+	font-family: Arial, Helvetica, sans-serif;
+	overflow: visible;
+	z-index: 1;
+}
+
+
+A.menu:Hover {
+	text-decoration: underline;
+}
+
+A.sub:Link {
+	text-decoration: none;
+}
+A.sub:Visited {
+color: #d58086;
+}
+A.sub:Hover {
+text-decoration: none;
+}
+
+INPUT {
+	color: #BB4553;
+	background:#ffffff;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 11px;
+	border: 1px solid #E6B5B8;
+}
+TEXTAREA {
+	color: #333333;
+	background:#ffffff;
+	font-family: Courier, New;
+	font-size: 11px;
+	border: 1px solid #BB4553;
+}
+SELECT {
+	color: #333333;
+	background:#ffffff;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 11px;
+	border: 1px solid #BB4553;
+}
+.wtitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #d38a94;
+}
+.title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	color: #bb4553;
+}
+tr {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #333333;
+	font-size: 11px;
+}
+.but {
+	color: #333333;
+	font-size: 9px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+A.but:Link {
+	color: #333333;
+	text-decoration: none;
+	text-align: justify;
+	border-width: 0px;
+}
+A.but:Visited {
+color: #333333;
+text-decoration: none;
+}
+A.but:Hover {
+color: #BB4553;
+text-decoration: none;
+}
+.smallbut {
+	color: #333333;
+	background:#F7E8E9;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 11px;
+	border: 1px solid #CC6269;
+}
+
+.smallbut:Visited {
+	color: #333333;
+}
+
+.smallbut:Hover {
+	color: #BB4553;
+}
+
+.OKbut {
+	color: #333333;
+	background:#BDD99F;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 11px;
+	border: 1px solid #80A45B;
+}
+.titlewhite {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+.boldred {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: bb4553;
+}
+.section {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #bb4553;
+}
+.credits {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #737C65;
+	letter-spacing: -0.02em;
+
+
+}
+.titlepopup {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #76AB45;
+}
+.txtwhite {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+}
+.intro {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666666;
+	font-style: italic;
+}
+.titlehelp {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #bb4553;
+	font-weight: bold;
+}
+.help {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666666;
+}
+
+.resultsName {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+	font-style: italic;
+        color: #76AB45;
+}
+
+TD.resultsDate {
+	font-family: courier new;
+	font-size: 11px;
+}
+
+A.results {
+        color: #b73c45;
+        text-decoration: none;
+        font-style: italic;
+}       
+
+SELECT.data {
+        color: #BB4553;
+        background:#ffffff;
+        font-family: arial, helvetica, sans-serif;
+        font-size: 9px;
+        border: 1px solid #BB4553;
+	width: 250px;
+}
+
+

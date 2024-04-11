@@ -1,0 +1,84 @@
+wEMBOSS, a web interface for EMBOSS
+===================================
+
+wEMBOSS is an interface to the EMBOSS bioinformatics tools
+(http://emboss.sourceforge.net). wEMBOSS can be downloaded from
+http://wemboss.sourceforge.net.
+
+wEMBOSS reference
+=================
+
+wEMBOSS: a web interface for EMBOSS
+Sarachu M. and Colet M.
+Bioinformatics 2005 21(4):540-541
+
+About the included applets
+==========================
+
+All applets are included with permission of the authors.
+
+- Zmasek C.M. and Eddy S.R. (2001) ATV: display and manipulation of annotated
+ phylogenetic trees. Bioinformatics, 17: 383-384.
+
+ ATV web site http://www.phylosoft.org/archaeopteryx
+
+- M. Clamp, J. Cuff, S.M. Searle and G.J. Barton (2004) The Jalview Java
+ alignment editor. Bioinformatics, 20: 426-427.
+- A.M. Waterhouse, J.B. Procter, D.M.A. Martin, M. Clamp and G.J. Barton (2009)
+ Jalview version 2 - a multiple sequence alignment editor and analysis
+ workbench. Bioinformatics 25: 1189-1191.
+
+ Jalview web site  http://www.jalview.org
+
+
+Warning
+-------
+The Jalview applet does not run under MacOS X with the Firefox browser.
+It does however work properly with Safari and Opera.
+
+
+wEMBOSS-2
+=========
+
+wEMBOSS-2 is completely reorganized from the developer and manager point-of-vue.
+wEMBOSS-2 has the same functionality as wEMBOSS-1.8.1 for the users.
+wEMBOSSDEV-2 for the developer is now a project in Eclipse using the Epic
+plug-in.
+wEMBOSSDIST-2.x is the corresponding distribution package. It is distributed as
+successive releases with version numbers. We are starting the distribution at
+version 2.1.
+
+What is different, in a few words :
+wEMBOSS does not install anymore its modules in the Perl system libraries.
+This is completely justified because the wEMBOSS Perl code is used first at
+installation time and later at wEMBOSS run time but never as reusable code for
+other applications.
+  
+Thus after installation you can find wEMBOSS-2 files only at 3 places :
+	- where you put the distribution package (of course)
+	- where you did install it (wEMBOSS home)
+	- under the document root of your Web server, where are all the files
+          needed to create the Web pages (html, images, css, js, ...).
+	- a fourth place could be the one where you have put all your personal
+          stuff that successive installations could otherwise have erased !
+
+
+The wEMBOSS.pm module has been split into 8 modules each one corresponding to
+one of the 8 possible actions  (project management, menu of programs, program
+page, run ...) 
+Part of the code is rewritten for clarity, the others parts will be rewritten
+later.
+
+My idea is to facilitate my succession for a new wEMBOSS developer.
+
+I am now retired so its more easy to spend time on it!
+
+Marc
+
+
+
+
+
+
+
+

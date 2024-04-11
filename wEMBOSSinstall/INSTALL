@@ -1,0 +1,93 @@
+Required Perl modules
+=====================
+wEMBOSS requires Mail::Mailer module from the MailTools package. This module is
+not included with Perl distribution. You can download MailTools from
+http://search.cpan.org/CPAN/authors/id/M/MA/MARKOV/MailTools-2.06.tar.gz
+Please examine the README file of this package.
+After unpacking the package, install by running these commands:
+	perl Makefile.PL
+	make
+	make test
+	make install 
+
+
+How to install wEMBOSS
+======================
+To install wEMBOSS execute
+	perl install.pl
+
+If you can't  appropriately answer to all the questions,
+don't worry, give a plausible answer and let the installation continue.
+If you didn't succeed the first time because you didn't know
+the answer to all the questions, you can now execute
+	perl install.pl < yourAnswers
+where yourAnswers is the file containing all your answers.
+Before a new installation edit that file and modify the wrong answers.
+Two myAnswers files are provided as examples.
+
+The cgi directory used by wEMBOSS can't be the default cgi-bin directory of the
+http server, because the users of this interface have to be authenticated.
+In wEMBOSS V2 it is located where you have installed wEMBOSS in the directory 
+called wEMBOSS_cgi.
+If for example you have chosen to  install wEMBOSS V2 in /home/wEMBOSS2, 
+the /home/wEMBOSS2/wEMBOSS_cgi directory will contain the cgi wrapper for
+wEMBOSS.
+You have to add some statements in the httpd.conf of the web-server (apache
+or ...) : 
+
+ScriptAlias /wEMBOSS_cgi/ /home/wEMBOSS2/wEMBOSS_cgi
+
+    <Directory "/home/wEMBOSS2/wEMBOSS_cgi">
+       AuthType basic
+       AuthUserFile "/etc/shadow"      
+       Authname "EMBOSS user"  
+       require valid-user
+    </Directory>
+
+Depending of the configuration of your server the way to make the directory
+accessible can be different. If you don't know, ask your server manager.
+
+How to manage the authentication of wEMBOSS users
+====================================================
+
+The password file must not necessarily be /etc/passwd or /etc/shadow like
+suggested above, but it must contain users that are known to the system and
+have a valid UNIX home directory, in which wEMBOSS can write its output data.
+The password file must be readable for the user that runs the httpd server
+(nobody, www...). 
+The file /etc/shadow is by default only readable by root, so you would need to
+execute
+chmod +r /etc/shadow
+to make it world readable.	
+To avoid making /etc/shadow or some other file you use as password file world
+readable, you can put the user that runs the httpd server in a dedicated group
+and let this group own the password file, e.g.
+add in the file /etc/group a line
+   shadow:x:15:nobody
+then do
+   chgrp shadow /etc/shadow
+   chmod 640 /etc/shadow
+   
+An alternative way is to create a password file for wEMBOSS users using the
+htpasswd program.
+All the user names mentioned must be present in the shadow or passwd files of
+the system but the passwords may be different. In the httpd.conf file you could then replace the line
+		AuthUserFile "/etc/shadow"
+by
+		AuthUserFile "/home/wEMBOSS2/.htpasswd"
+if you put there the password file.
+To get more security you should make it only readable by the user that runs httpd (nobody or ...)
+	chown nobody /home/wEMBOSS2/.htpasswd
+	chmod 400 /home/wEMBOSS2/.htpasswd
+
+
+How to exclude programs from wEMBOSS
+====================================
+
+By default wEMBOSS does not show programs that need to be run interactively
+in a terminal or that are used to update the motif databases. You can customize
+the list of excluded programs by editing the file
+/home/wEMBOSS2/embossData/exclude.
+ E.g. if you want to exclucde cirdna, add a line
+cirdna           Draws circular maps of DNA constructs
+
