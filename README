@@ -50,7 +50,18 @@ qqpart là où il y a déjà des balises <Directory>
       Require valid-user
 </Directory>
 
+pour finir
 
+/etc/init.d/apache2 reload
+groupadd shadow
+usermod -a -G shadow apache
+chgrp shadow /etc/shadow
+chmod 640 /etc/shadow
+/etc/init.d/apache2 reload
+
+#Créer un compte :
+useradd -m 'Nom'
+passwd 'Nom'
 
 
 wEMBOSS, a web interface for EMBOSS
