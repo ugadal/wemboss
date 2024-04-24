@@ -13,9 +13,10 @@ ou systemd :
 ```
 ```
 cd /opt
-git clone 
-cd /opt/wemboss
+git clone https://github.com/ugadal/wemboss.git
+cd wemboss
 cd wEMBOSSinstall
+```
 lisez INSTALL
 lancez: perl install.pl
 
