@@ -4,5 +4,5 @@ apache
 /var/www/localhost/htdocs
 localhost
 80
-/opt/wemboss
-"moi"@localhost
+/opt/wemboss_site
+wemboss@this.site
