@@ -37,6 +37,20 @@ Ajoutez Trois lignes un peu avant la fin
   # httpd as root initially and it will switch.
   #
 
+La modification dans le default_vhost.include se simplifie elle devient :
+fichier: /etc/apache2/vhosts.d/default_vhost.include qqpart ou il y a déjà une ligne ScriptAlias
+
+ScriptAlias /wEMBOSS_cgi/ "/opt/wemboss_site/wEMBOSS_cgi/"
+qqpart là où il y a déjà des balises <Directory>
+
+<Directory "/opt/wemboss_site/wEMBOSS_cgi">
+      AuthBasicProvider shadfile
+      AuthType basic
+      Authname "EMBOSS user"
+      Require valid-user
+</Directory>
+
+
 
 
 wEMBOSS, a web interface for EMBOSS
