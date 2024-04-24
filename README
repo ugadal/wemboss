@@ -1,7 +1,9 @@
+# librairies nécessaires
+```
 emerge -qv MailTools
 emerge -qv dev-perl/CGI
-
-<bold>wEMBOSS utilise apache pour fonctionner, il est nécessaire de l'installer et de l'activer avant l'installation de wEMBOSS :</bold>
+```
+** wEMBOSS utilise apache pour fonctionner, il est nécessaire de l'installer et de l'activer avant l'installation de wEMBOSS : **
 
 emerge apache
   /etc/init.d/apache2 start
