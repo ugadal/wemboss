@@ -18,7 +18,7 @@ cd wemboss
 cd wEMBOSSinstall
 ```
 lisez INSTALL
-lancez: perl install.pl
+lancez: ```perl install.pl```
 
 et répondez aux questions comme suit: (valeurs par défaut adaptées à Gentoo)
 ```
@@ -39,9 +39,9 @@ Ajoutez Trois lignes un peu avant la fin
 ```
   LoadModule usertrack_module modules/mod_usertrack.so
   LoadModule vhost_alias_module modules/mod_vhost_alias.so
-  <AuthnProviderAlias file shadfile>
+  **<AuthnProviderAlias file shadfile>
        AuthUserFile "/etc/shadow"
-  </AuthnProviderAlias>
+  </AuthnProviderAlias>**
   # If you wish httpd to run as a different user or group, you must run
   # httpd as root initially and it will switch.
   #
