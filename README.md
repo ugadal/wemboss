@@ -39,17 +39,18 @@ Ajoutez Trois lignes un peu avant la fin
 ```
   LoadModule usertrack_module modules/mod_usertrack.so
   LoadModule vhost_alias_module modules/mod_vhost_alias.so
-  **<AuthnProviderAlias file shadfile>
+  <AuthnProviderAlias file shadfile>
        AuthUserFile "/etc/shadow"
-  </AuthnProviderAlias>**
+  </AuthnProviderAlias>
   # If you wish httpd to run as a different user or group, you must run
   # httpd as root initially and it will switch.
   #
 ```
 
 La modification dans le default_vhost.include se simplifie elle devient :
-fichier: /etc/apache2/vhosts.d/default_vhost.include qqpart ou il y a déjà une ligne ScriptAlias
 
+fichier: /etc/apache2/vhosts.d/default_vhost.include qqpart ou il y a déjà une ligne ScriptAlias
+```
 ScriptAlias /wEMBOSS_cgi/ "/opt/wemboss_site/wEMBOSS_cgi/"
 qqpart là où il y a déjà des balises <Directory>
 
@@ -59,15 +60,17 @@ qqpart là où il y a déjà des balises <Directory>
       Authname "EMBOSS user"
       Require valid-user
 </Directory>
-
+```
 pour finir
 
+```
 /etc/init.d/apache2 reload
 groupadd shadow
 usermod -a -G shadow apache
 chgrp shadow /etc/shadow
 chmod 640 /etc/shadow
 /etc/init.d/apache2 reload
+```
 
 #Créer un compte :
 useradd -m 'Nom'
