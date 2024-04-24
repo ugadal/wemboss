@@ -39,7 +39,7 @@ open ANSWERS, ">./yourAnswers"
         or die "couldn't write to ../yourAnswers  $!";
 my $emboss_home = prompt(
 	"Where was the share/EMBOSS data directory installed?",
-	"/usr/local/emboss/share/EMBOSS"
+	"/usr/local/share/EMBOSS"
 );
 print ANSWERS "$emboss_home\n";
 my $emboss_bin = prompt(
@@ -49,12 +49,12 @@ my $emboss_bin = prompt(
 print ANSWERS "$emboss_bin\n";
 my $nobody  = prompt(
 	"Who is the owner of the httpd processes of the web server ? (ask system manager if needed)",
-	"nobody"
+	"apache"
 );
 print ANSWERS "$nobody\n";
 my $web_root = prompt(
 	"Where is the root of the web server document tree?",
-	"/home/httpd"
+	"/var/www/localhost/htdocs"
 );
 print ANSWERS "$web_root\n";
 my $hostname = prompt(
@@ -69,7 +69,7 @@ my $port = prompt(
 print ANSWERS "$port\n";
 my $wemboss_home = prompt(
       "Where should wEMBOSS be installed?",
-      "/home/wEMBOSS"
+      "/opt/wemboss_site"
 );
 print ANSWERS "$wemboss_home\n";
 my $wemboss_mail = prompt(
