@@ -20,7 +20,8 @@ cd wEMBOSSinstall
 lisez INSTALL
 lancez: perl install.pl
 
-et répondez aux questions comme suit:
+et répondez aux questions comme suit: (valeurs par défaut adaptées à Gentoo)
+```
 /usr/local/share/EMBOSS
 /usr/local/bin
 apache
@@ -29,11 +30,13 @@ localhost
 80
 /opt/wemboss_site
 "moi"@localhost
-
+```
 Modifications à effectuer dans le fichier /etc/apache2/vhosts.d/default_vhost.include
-première modif dans /etc/apache2/httpd.conf
-Ajoutez Trois lignes un peu avant la fin
 
+première modif dans /etc/apache2/httpd.conf
+
+Ajoutez Trois lignes un peu avant la fin
+```
   LoadModule usertrack_module modules/mod_usertrack.so
   LoadModule vhost_alias_module modules/mod_vhost_alias.so
   <AuthnProviderAlias file shadfile>
@@ -42,6 +45,7 @@ Ajoutez Trois lignes un peu avant la fin
   # If you wish httpd to run as a different user or group, you must run
   # httpd as root initially and it will switch.
   #
+```
 
 La modification dans le default_vhost.include se simplifie elle devient :
 fichier: /etc/apache2/vhosts.d/default_vhost.include qqpart ou il y a déjà une ligne ScriptAlias
